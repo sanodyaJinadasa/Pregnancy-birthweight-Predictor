@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregnancy Birthweight Predictor</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6f61;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="number"]:focus {
+            border-color: #ff6f61;
+            box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff6f61;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ff3b2e;
+        }
+
+        .prediction {
+            margin-top: 20px;
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #ffe6e0;
+            color: #ff3b2e;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pregnancy Birthweight Predictor</h1>
+        <form action="/predict" method="post">
+            <label for="gestation">Gestation (days):</label>
+            <input type="number" name="gestation" id="gestation" step="1" required>
+
+            <label for="parity">Parity (0=first, 1=not first):</label>
+            <input type="number" name="parity" id="parity" required>
+
+            <label for="age">Age (years):</label>
+            <input type="number" name="age" id="age" step="0.1" required>
+
+            <label for="height">Height (inches):</label>
+            <input type="number" name="height" id="height" step="0.1" required>
+
+            <label for="weight">Weight (lbs):</label>
+            <input type="number" name="weight" id="weight" step="0.1" required>
+
+            <label for="smoke">Smoke (0=no, 1=yes):</label>
+            <input type="number" name="smoke" id="smoke" required>
+
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction %}
+            <div class="prediction">
+                Predicted Birthweight: {{ prediction }} lbs
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
